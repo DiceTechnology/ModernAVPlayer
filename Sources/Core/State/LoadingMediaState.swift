@@ -63,6 +63,12 @@ final class LoadingMediaState: PlayerState {
     
     func contextUpdated() {
         /*
+         Loading a clip media from playing state, play automatically the new clip media
+         Ensure player will play only when we ask
+         */
+        context.player.pause()
+
+        /*
          It seems to be a good idea to reset player current item
          Fix side effect when coming from failed state
          */
@@ -176,13 +182,6 @@ final class LoadingMediaState: PlayerState {
     private func moveToLoadedState() {
         let state = LoadedState(context: self.context)
         context.changeState(state: state)
-        
-        /*
-         Loading a clip media from playing state, play automatically the new clip media
-         Ensure player will play only when we ask
-         */
-        context.player.pause()
-        
         if autostart { state.play() }
     }
 }
