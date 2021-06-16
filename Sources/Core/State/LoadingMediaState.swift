@@ -177,12 +177,10 @@ final class LoadingMediaState: PlayerState {
         let state = LoadedState(context: self.context)
         context.changeState(state: state)
         
-        /*
-         Loading a clip media from playing state, play automatically the new clip media
-         Ensure player will play only when we ask
-         */
-        context.player.pause()
-        
-        if autostart { state.play() }
+        if autostart {
+            state.play()
+        } else {
+            context.player.pause()
+        }
     }
 }
